@@ -1,0 +1,134 @@
+{
+  "tabs": [
+    {
+      "key": "donations",
+      "name": "Donations",
+      "headers": [
+        "Ref",
+        "Created At",
+        "Status",
+        "Amount (INR)",
+        "Cause",
+        "Donor Name",
+        "Email",
+        "Phone",
+        "PAN",
+        "Address",
+        "City",
+        "State",
+        "Pincode",
+        "Wants 80G",
+        "Citizen Declared",
+        "Dedication",
+        "Paid Via",
+        "UTR",
+        "Reported At",
+        "Verified By",
+        "Receipt No",
+        "Receipt Sent At",
+        "Staff Notes"
+      ],
+      "status": {
+        "column": "Status",
+        "options": [
+          "Awaiting payment",
+          "Payment reported",
+          "Confirmed",
+          "Receipt sent",
+          "Not received",
+          "Duplicate",
+          "Refunded",
+          "Void"
+        ]
+      },
+      "widths": { "Ref": 150, "Status": 150, "Donor Name": 170, "Email": 210, "Address": 240, "Staff Notes": 260 }
+    },
+    {
+      "key": "receipts",
+      "name": "Receipts",
+      "protected": true,
+      "headers": [
+        "Receipt No",
+        "Issued At",
+        "Donation Ref",
+        "Date Received",
+        "Amount (INR)",
+        "Donor Name",
+        "Email",
+        "PAN",
+        "Address",
+        "Paid Via",
+        "UTR",
+        "Cause",
+        "Donation Type",
+        "Receipt Status"
+      ],
+      "widths": { "Receipt No": 170, "Donor Name": 170, "Email": 210, "Address": 260 }
+    },
+    {
+      "key": "contact",
+      "name": "Contact",
+      "headers": ["Submitted At", "Name", "Email", "Phone", "Subject", "Message", "Status", "Owner", "Staff Notes"],
+      "status": { "column": "Status", "options": ["New", "In progress", "Replied", "Closed"] },
+      "widths": { "Message": 360, "Email": 210, "Staff Notes": 260 }
+    },
+    {
+      "key": "volunteers",
+      "name": "Volunteers",
+      "headers": [
+        "Submitted At",
+        "Name",
+        "Email",
+        "Phone",
+        "City",
+        "Age Group",
+        "Type",
+        "Interests",
+        "Availability",
+        "Skills",
+        "Message",
+        "Guardian Consent",
+        "Status",
+        "Owner",
+        "Staff Notes"
+      ],
+      "status": { "column": "Status", "options": ["New", "Contacted", "Onboarded", "On hold", "Not a fit"] },
+      "widths": { "Interests": 240, "Skills": 260, "Message": 300, "Email": 210 }
+    },
+    {
+      "key": "partners",
+      "name": "Partners",
+      "headers": [
+        "Submitted At",
+        "Organisation",
+        "Organisation Type",
+        "Contact Person",
+        "Designation",
+        "Email",
+        "Phone",
+        "Website",
+        "Interest",
+        "Message",
+        "Status",
+        "Owner",
+        "Staff Notes"
+      ],
+      "status": { "column": "Status", "options": ["New", "In discussion", "Agreed", "Closed"] },
+      "widths": { "Organisation": 200, "Interest": 240, "Message": 320, "Email": 210 }
+    },
+    {
+      "key": "newsletter",
+      "name": "Newsletter",
+      "headers": ["Subscribed At", "Email", "Name", "Source Page", "Status"],
+      "status": { "column": "Status", "options": ["Subscribed", "Unsubscribed"] },
+      "widths": { "Email": 240 }
+    },
+    {
+      "key": "log",
+      "name": "System Log",
+      "protected": true,
+      "headers": ["Time", "Source", "Event", "Reference", "Result", "Details"],
+      "widths": { "Details": 420 }
+    }
+  ]
+}

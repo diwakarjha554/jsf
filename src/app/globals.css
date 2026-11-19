@@ -1,0 +1,585 @@
+@import "tailwindcss";
+
+@theme {
+  /* Plum: structure, headings, dark sections */
+  --color-brand-50: #f6f3fc;
+  --color-brand-100: #ece6f9;
+  --color-brand-200: #d9cef2;
+  --color-brand-300: #bba8e6;
+  --color-brand-400: #9479d4;
+  --color-brand-500: #7353bf;
+  --color-brand-600: #5b3da3;
+  --color-brand-700: #472f82;
+  --color-brand-800: #352263;
+  --color-brand-900: #241645;
+  --color-brand-950: #160d2d;
+
+  /* Marigold: primary action */
+  --color-sun-50: #fff9eb;
+  --color-sun-100: #fff0c7;
+  --color-sun-200: #ffe28f;
+  --color-sun-300: #ffd15c;
+  --color-sun-400: #ffc233;
+  --color-sun-500: #ffae0a;
+  --color-sun-600: #e68f00;
+  --color-sun-700: #b86b00;
+  --color-sun-800: #8a4f05;
+  --color-sun-900: #5e3608;
+
+  /* Vermilion: accents */
+  --color-ember-300: #ff9b80;
+  --color-ember-400: #ff7552;
+  --color-ember-500: #f5532e;
+  --color-ember-600: #db3b17;
+  --color-ember-700: #b32d10;
+
+  /* Warm neutrals */
+  --color-cream: #fffbf4;
+  --color-sand: #f7f0e5;
+  --color-sand-dark: #e9dfcf;
+  --color-ink: #1c1530;
+  --color-muted: #5b5570;
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
+
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-spin-slow: orbit 60s linear infinite;
+  --animate-spin-slow-reverse: spin-reverse 60s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-delayed: float 7s ease-in-out 1.6s infinite;
+  --animate-drift: drift 22s ease-in-out infinite alternate;
+  --animate-pulse-ring: pulse-ring 2.6s ease-out infinite;
+  --animate-fade-in: fade-in 0.5s ease both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spin-reverse {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(6%, -8%, 0) scale(1.12);
+    }
+    100% {
+      transform: translate3d(-5%, 6%, 0) scale(0.95);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.85);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+}
+
+:root {
+  interpolate-size: allow-keywords;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-width: 300px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sun-400);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-sun-200);
+  color: var(--color-ink);
+}
+
+/* ── Fluid type scale (300px → 1600px) ─────────────────────────────── */
+@utility text-hero {
+  font-size: clamp(2.35rem, 1.2rem + 5.4vw, 6.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+@utility text-display {
+  font-size: clamp(2.1rem, 1.25rem + 3.9vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+@utility text-title {
+  font-size: clamp(1.8rem, 1.2rem + 2.5vw, 3.6rem);
+  line-height: 1.14;
+  letter-spacing: -0.028em;
+}
+@utility text-lead {
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.3rem);
+  line-height: 1.65;
+}
+
+/* Italic serif accent with a warm gradient */
+@utility text-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background-image: linear-gradient(100deg, var(--color-ember-600) 0%, var(--color-ember-500) 40%, var(--color-sun-600) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+}
+@utility text-accent-light {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background-image: linear-gradient(100deg, var(--color-sun-300) 0%, var(--color-ember-300) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+}
+
+/* ── Backgrounds ───────────────────────────────────────────────────── */
+@utility bg-mesh-warm {
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(40rem 28rem at 92% 8%, rgb(255 194 51 / 0.28), transparent 70%),
+    radial-gradient(34rem 26rem at 0% 100%, rgb(187 168 230 / 0.35), transparent 70%),
+    radial-gradient(26rem 20rem at 55% 55%, rgb(255 155 128 / 0.14), transparent 70%);
+}
+@utility bg-mesh-dark {
+  background-color: var(--color-brand-950);
+  background-image:
+    radial-gradient(42rem 30rem at 100% 0%, rgb(115 83 191 / 0.55), transparent 70%),
+    radial-gradient(36rem 26rem at 0% 100%, rgb(245 83 46 / 0.28), transparent 70%),
+    radial-gradient(30rem 22rem at 45% 40%, rgb(255 174 10 / 0.1), transparent 70%);
+}
+@utility bg-sunrise {
+  background-image: linear-gradient(120deg, var(--color-sun-300) 0%, var(--color-sun-500) 45%, var(--color-ember-500) 100%);
+}
+@utility bg-grid-faint {
+  background-image:
+    linear-gradient(to right, rgb(36 22 69 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(36 22 69 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Film grain overlay: add class "grain" to a positioned element */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ── Scroll reveal (driven by components/ui/effects.tsx) ──────────── */
+/* Entrance effects enhance visible content; there is deliberately no hidden state. */
+
+/* ── Spotlight that follows the pointer on [data-spotlight] cards ─── */
+[data-spotlight] {
+  position: relative;
+  isolation: isolate;
+}
+[data-spotlight]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.22), transparent 45%);
+}
+[data-spotlight]:hover::before {
+  opacity: 1;
+}
+
+/* ── Button shine sweep ───────────────────────────────────────────── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateX(-120%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  transition: transform 0.7s ease;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%) skewX(-18deg);
+}
+
+/* ── Header state (set by effects.tsx) ────────────────────────────── */
+#site-header[data-scrolled="true"] {
+  background: rgb(255 251 244 / 0.86);
+  box-shadow: 0 10px 40px -24px rgb(22 13 45 / 0.35);
+  border-color: rgb(233 223 207 / 0.9);
+}
+
+/* ── Accordion (native <details>) with animated height ────────────── */
+.faq details::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height 0.35s ease,
+    content-visibility 0.35s allow-discrete;
+}
+.faq details[open]::details-content {
+  height: auto;
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Hide scrollbars on horizontal tab strips while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Long-form text: policies and stories ─────────────────────────── */
+.prose-jsf {
+  color: var(--color-ink);
+  line-height: 1.8;
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0875rem);
+}
+.prose-jsf > * + * {
+  margin-top: 1.1em;
+}
+.prose-jsf h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.85rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 2em;
+  color: var(--color-brand-900);
+}
+.prose-jsf h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 1.6em;
+  color: var(--color-brand-900);
+}
+.prose-jsf ul {
+  list-style: none;
+  padding-left: 0;
+}
+.prose-jsf ul > li {
+  position: relative;
+  padding-left: 1.5em;
+}
+.prose-jsf ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.2em;
+  top: 0.72em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: var(--color-sun-500);
+}
+.prose-jsf ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+}
+.prose-jsf li + li {
+  margin-top: 0.5em;
+}
+.prose-jsf a {
+  color: var(--color-brand-700);
+  text-decoration: underline;
+  text-decoration-color: var(--color-sun-400);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.prose-jsf strong {
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Premium layer (v3): smooth scroll, intro, hero, 3D orbit, aurora,
+   glow borders, cursor. Pure CSS where possible so content never
+   depends on JavaScript to become visible.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Lenis smooth scroll (recommended base styles) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ── Entrance keyframes (CSS-only, delayed while the intro plays) ── */
+@keyframes rise {
+  from {
+    transform: translate3d(0, 110%, 0) rotate(3deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes fade-up-blur {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.anim-rise {
+  display: inline-block;
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+.anim-fade {
+  animation: fade-up-blur 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+.anim-scale {
+  animation: scale-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+html.intro .anim-rise,
+html.intro .anim-fade,
+html.intro .anim-scale {
+  animation-delay: calc(var(--d, 0s) + 2.15s);
+}
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* ── Intro loader (shown only on the first page of a visit) ─────── */
+.intro-loader {
+  display: none;
+}
+html.intro .intro-loader {
+  display: flex;
+  animation: intro-failsafe 0.01s linear 4.5s forwards;
+}
+@keyframes intro-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+/* ── Aurora stripes (adapted from Vengeance UI Aurora Hero / Animated Rays) ── */
+@keyframes aurora-pan {
+  from {
+    background-position:
+      50% 50%,
+      50% 50%;
+  }
+  to {
+    background-position:
+      350% 50%,
+      350% 50%;
+  }
+}
+@utility bg-aurora {
+  --stripes: repeating-linear-gradient(100deg, var(--aurora-base, #160d2d) 0%, var(--aurora-base, #160d2d) 7%, transparent 10%, transparent 12%, var(--aurora-base, #160d2d) 16%);
+  --rainbow: repeating-linear-gradient(100deg, #ffc233 10%, #f5532e 15%, #9479d4 20%, #ffd15c 25%, #f5532e 30%);
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 300%, 200%;
+  background-position: 50% 50%, 50% 50%;
+  filter: blur(12px) saturate(140%);
+}
+
+/* ── Glow border (adapted from Vengeance UI Glow Border Card) ────── */
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes glow-rotate {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+.glow-conic {
+  border-color: transparent;
+  background: conic-gradient(
+      from var(--glow-angle),
+      var(--glow-color-1),
+      var(--glow-color-2),
+      var(--glow-color-3),
+      var(--glow-color-4),
+      var(--glow-color-5),
+      var(--glow-color-6),
+      var(--glow-color-7),
+      var(--glow-color-8),
+      var(--glow-color-9),
+      var(--glow-color-10)
+    )
+    border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box exclude,
+    linear-gradient(#000 0 0) border-box;
+  animation: glow-rotate var(--glow-animation-duration, 6s) linear infinite;
+}
+
+
+/* ── Header tone over dark surfaces ──────────────────────────────── */
+#site-header[data-tone="dark"] {
+  --nav-ink: #ffffff;
+  color: #fff;
+}
+#site-header[data-tone="dark"][data-scrolled="true"] {
+  background: rgb(22 13 45 / 0.72);
+  border-color: rgb(255 255 255 / 0.08);
+  box-shadow: 0 10px 40px -24px rgb(0 0 0 / 0.6);
+}
+#site-header[data-tone="dark"]:not([data-scrolled="true"]) {
+  background: transparent;
+}
+.logo-on-dark {
+  display: none;
+}
+#site-header[data-tone="dark"] .logo-on-dark {
+  display: flex;
+}
+#site-header[data-tone="dark"] .logo-on-light {
+  display: none;
+}
+
+/* Header over the dark home hero before JavaScript decides (data-tone="auto") */
+html:has(#home-hero) #site-header[data-tone="auto"]:not([data-scrolled="true"]) {
+  background: transparent;
+  color: #fff;
+}
+html:has(#home-hero) #site-header[data-tone="auto"] .logo-on-dark {
+  display: flex;
+}
+html:has(#home-hero) #site-header[data-tone="auto"] .logo-on-light {
+  display: none;
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+
+/* Shared vertical rhythm for sections (tight on phones, generous but not empty on desktop) */
+@utility section-pad {
+  padding-block: clamp(3.5rem, 2.6rem + 3.2vw, 6.5rem);
+}
